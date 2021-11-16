@@ -1,4 +1,4 @@
-b65402291df096b21fd92dddb2883f52 *DESCRIPTION
+2670bf598395e109841be17737171246 *DESCRIPTION
 49a1ba2838948a7a2197941985230190 *NAMESPACE
 7a2e07ab0148fb41e7815a19ed3fea36 *R/data_docs.R
 63704f64daa368dcf505b1f38a0a19e3 *R/generics.R
@@ -24,7 +24,7 @@ bc5bfac9a3faa890738ca03cf242bdf1 *data/pdb.rda
 bf98965d005450f803a39c1abe99e71b *inst/doc/data-cleaning.html
 9c16f86461832082f4a7d282578da4b8 *inst/doc/padrino-intro.R
 76643a38b3ae0530992cf20cb3eaccd4 *inst/doc/padrino-intro.Rmd
-53826c268c62175044ae4b0abbb1e92c *inst/doc/padrino-intro.html
+f3eeaf786623c38bb2f6a526e680b1f0 *inst/doc/padrino-intro.html
 e2f62e087e4eea272001e45e6264e83e *man/in_out.Rd
 cd11ff4e22fe58a5fe520a732835b422 *man/ipmr_generics.Rd
 55a590bc5bc81e83aa8bd8420ac87692 *man/metadata_utils.Rd
@@ -36,12 +36,12 @@ f7fc830ee2468e332a613e779b876e08 *man/pipe.Rd
 18ad544047750108388e9dd044584414 *man/print_star.Rd
 056039a5178e3e75882b06f12880e733 *man/tidyeval.Rd
 7bd82973bae281c62372771c6e8a3b3d *tests/testthat.R
-4226cf5494e57ab192dec442ebe9d3ea *tests/testthat/Rplots.pdf
+abddf29dbe1778f717150aeb053ccdd9 *tests/testthat/Rplots.pdf
 bdb37cd41777dbf9d046b40d8183cb1e *tests/testthat/test-io.R
 61a1a50932d66dc6eec660b0049905d9 *tests/testthat/test-ipm_pipeline.R
-7ada8c6c155eb7f4e8eda1dd0cf7f58c *tests/testthat/test-ipmr_generics.R
+f8789bf95b603a472826c2a57268a4af *tests/testthat/test-ipmr_generics.R
 a8bd9d07d76fd12c80c197533ee3159e *tests/testthat/test-make_proto.R
-9e466f0853b1c6f10c18eeb03d027051 *tests/testthat/test-pdb_report.R
+8a397fa54263f84c3d1dade5fe2f3699 *tests/testthat/test-pdb_report.R
 a7185a092f67b192e9a4916fdd85b875 *tests/testthat/test-subset_db.R
 35f81d90a7e9adbb028bd7c680f0e03e *vignettes/data-cleaning.Rmd
 76643a38b3ae0530992cf20cb3eaccd4 *vignettes/padrino-intro.Rmd
