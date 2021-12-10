@@ -1,6 +1,6 @@
 Package: Rpadrino
 Title: Interact with the 'PADRINO' IPM Database
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: c(
     person(given = "Sam",
            family = "Levin",
@@ -56,7 +56,7 @@ VignetteBuilder: knitr
 Config/testthat/parallel: true
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2021-11-16 09:25:27 UTC; sl13sise
+Packaged: 2021-12-08 13:40:03 UTC; sl13sise
 Author: Sam Levin [aut, cre] (<https://orcid.org/0000-0002-3289-9925>),
   Aldo Compagnoni [aut],
   Dylan Childs [aut],
@@ -66,4 +66,4 @@ Author: Sam Levin [aut, cre] (<https://orcid.org/0000-0002-3289-9925>),
   Tiffany Knight [aut]
 Maintainer: Sam Levin <levisc8@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-11-16 11:50:06 UTC
+Date/Publication: 2021-12-10 08:40:04 UTC
