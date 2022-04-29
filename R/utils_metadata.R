@@ -11,8 +11,9 @@
 #' @param ipm_id The ID of the model. The default (\code{NULL}) returns all
 #' values in the \code{pdb} object.
 #'
-#' @return A vector of the metadata. For \code{pdb_report}e file path to the
-#' rendered output, or to the \code{.rmd} file when \code{render_output = FALSE}.
+#' @return A named vector of the metadata. The names correspond to
+#' \code{ipm_ids}s. For \code{pdb_report}, the file path to the rendered output,
+#' or to the \code{.rmd} file when \code{render_output = FALSE}.
 #'
 #' @export
 
@@ -209,14 +210,29 @@ pdb_has_age <- .make_pdb_accessor("has_age")
 #' @param title The title for the created report.
 #' @param keep_rmd Keep the un-rendered Rmd file? Useful for manual editing.
 #' @param rmd_dest The folder to save the Rmd file at if \code{keep_rmd = TRUE}.
-#' The default is \code{getwd()}.
+#'   The default is \code{getwd()}.
 #' @param output_format The output format to create. Options are "html", "pdf",
-#' "word", "odt", "rtf", or "md".
-#' @param render_output A logical - should the document be rendered for inspection?
+#'   "word", "odt", "rtf", or "md".
+#' @param render_output A logical - should the document be rendered for
+#'   inspection?
 #' @param map Create a map of studies included in the \code{pdb} object?
+#' @param translate_eqs A logical - should the mathematical equations of the IPM(s)
+#'   also be included in the report? These are translated from R to Latex by
+#'   \code{\link[ipmr]{make_ipm_report_body}}. Currently, this is only available
+#'   for IPMs that do not have parameter set indexed terms.
+#' @param block_eqs If \code{report_eqs = TRUE}, should equations be reported in
+#'   block format or as inline equations? This main difference for \code{"pdf"}
+#'   formats is that equation numbering is done with \code{tag{}}. For
+#'   non-\code{"pdf"} formats, the difference is that equations are centered.
+#'   Numbering may yield strange results for non-\code{"pdf"} formats.
+#' @param long_eq_length For longer equations, \code{make_ipm_report} tries to
+#'   wrap these into multiple lines using \code{\\\\}. This parameter controls
+#'   the number of characters per line. Default is 65. Ignored when
+#'   \code{block_eqs = FALSE}.
 #'
 #' @importFrom rmarkdown render
 #' @importFrom stats complete.cases
+#' @importFrom ipmr make_ipm_report_body
 #' @export
 
 pdb_report <- function(pdb,
@@ -225,11 +241,14 @@ pdb_report <- function(pdb,
                        rmd_dest = getwd(),
                        output_format = "html",
                        render_output = TRUE,
-                       map = TRUE) {
+                       map = TRUE,
+                       translate_eqs = FALSE,
+                       block_eqs = FALSE,
+                       long_eq_length = 65) {
 
   rmd_dest <- .pdb_rmd_dest(rmd_dest, keep_rmd)
 
-  output <- .pdb_rmd_header(title, output_format)
+  output   <- .pdb_rmd_header(title, output_format, block_eqs)
 
   md       <- pdb$Metadata
   ev       <- pdb$EnvironmentalVariables
@@ -254,6 +273,46 @@ pdb_report <- function(pdb,
 
     ev_env <- new.env()
     ev_env$coords <- coords
+  }
+
+
+  if(translate_eqs) {
+
+    for(i in seq_along(pdb$Metadata$ipm_id)) {
+
+      id <- pdb$Metadata$ipm_id[i]
+
+      spp_nm    <- gsub("_", " ", pdb$Metadata$species_accepted[i])
+      spp_hdr   <- paste0("\n\n# IPM Equations for ",
+                          spp_nm,
+                          " (`ipm_id = '", id, "'`)\n\n")
+
+      if(id %in% par_sets$ipm_id) {
+
+        msg <- paste0("Equation reporting currently unavailable",
+                      " for parameter set indexed IPMs.")
+
+        message(msg)
+
+        eq_txt <- msg
+
+      } else {
+
+        temp_prot <- suppressMessages(
+          pdb_make_proto_ipm(pdb, ipm_id = id)
+        )
+
+        eq_txt    <- ipmr::make_ipm_report_body(temp_prot[[1]],
+                                                block_eqs,
+                                                rmd_dest,
+                                                long_eq_length)
+      }
+
+      output <- c(output, spp_hdr, eq_txt)
+
+
+    }
+
   }
 
   output <- .pdb_rmd_citations(output, pdb) %>%
@@ -576,14 +635,25 @@ pdb_report <- function(pdb,
 
 #' @noRd
 
-.pdb_rmd_header <- function(title, output_format) {
+.pdb_rmd_header <- function(title, output_format, block_eqs) {
+
+
+  if(block_eqs && ! output_format %in% c("pdf", "html")) {
+
+    message("Block equation numbering may not work well in formats other than",
+            " 'html' or 'pdf'!\nMake sure to inspect output.")
+  }
 
   paste("---",
         paste0("title: '", title, "'"),
-        paste0("output: ", output_format, "_document"),
+        paste0("output:\n  ",
+               output_format,
+               "_document:\n    toc: true\n    toc_depth: 3"),
         paste0("date: '`r Sys.Date()`'"),
         paste0("urlcolor: blue"),
-
+        ifelse(block_eqs,
+               paste0("header_includes:\n  - \\usepackage{amsmath}"),
+               ""),
         # Other options need to be added here!
 
         '---\n',

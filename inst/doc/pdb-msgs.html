@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<meta name="date" content="2022-04-28" />
+
+<title>Messages and Warnings in PADRINO</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Messages and Warnings in PADRINO</h1>
+<h4 class="date">2022-04-28</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#messages-and-warnings-during-proto_ipm-construction-from-ipmr-level-functions">Messages
+and warnings during <code>proto_ipm</code> construction from
+<code>ipmr</code>-level functions</a></li>
+<li><a href="#messages-and-warnings-during-proto_ipm-construction-from-rpadrino-level-functions">Messages
+and warnings during <code>proto_ipm</code> construction from
+<code>Rpadrino</code>-level functions</a></li>
+<li><a href="#messages-and-warnings-during-ipm-construction-from-ipmr-level-functions">Messages
+and warnings during IPM construction from <code>ipmr</code>-level
+functions</a></li>
+<li><a href="#messages-and-warnings-during-ipm-construction-from-rpadrino-level-functions">Messages
+and warnings during IPM construction from <code>Rpadrino</code>-level
+functions</a></li>
+</ul>
+</div>
+
+<p>We try to digitize as much data as possible in as transparent a
+manner as possible. Therefore, <code>Rpadrino</code> and PADRINO try to
+be as noisy as possible about the underlying models, so that potential
+issues don’t slip through unnoticed. This behavior may seem unnerving at
+first, but it is only in the interest of maximum transparency with
+respect to the underlying IPMs. This document describes in longer form
+what these messages mean, and where they originate from.</p>
+<div id="messages-and-warnings-during-proto_ipm-construction-from-ipmr-level-functions" class="section level1">
+<h1>Messages and warnings during <code>proto_ipm</code> construction
+from <code>ipmr</code>-level functions</h1>
+<p>These messages appear after a call to
+<code>pdb_make_proto_ipm()</code>, and originate from <code>ipmr</code>
+functions. Usually, they are innocuous and can be ignored. These
+include:</p>
+<ul>
+<li><code>Warning: Assuming that all kernels are implemented with the same &#39;int_rule&#39;.</code>
+This means that, for one reason or another, <code>Rpadrino</code>
+couldn’t find the specific integration rule for a specific sub-kernel in
+PADRINO. In turn, it assumes that all sub-kernels have the same
+integration rule. This is OK because the only integration rule is the
+midpoint rule (as of now). We are not aware of any IPMs that use
+different integration rules for different sub-kernels within the same
+IPM anyway, so this assumption seems reasonable.</li>
+</ul>
+<p>More will be added here as they appear in later versions of
+<code>ipmr</code>.</p>
+</div>
+<div id="messages-and-warnings-during-proto_ipm-construction-from-rpadrino-level-functions" class="section level1">
+<h1>Messages and warnings during <code>proto_ipm</code> construction
+from <code>Rpadrino</code>-level functions</h1>
+<p>These messages appear as a result of comments left by digitizers in
+PADRINO itself. Sometimes, these are issues the user must be aware of,
+and sometimes, they are comments for the digitization team. Examples of
+the former include:</p>
+<ul>
+<li><p><code>Frankenstein IPM</code>. This is used to indicate a
+situation where parameter estimates are drawn from multiple sources of
+data that the authors did not necessarily collect themselves. For
+example, <a href="https://doi.org/10.1002/ecy.2681">Levin et
+al. (2019)</a> used data collected from field sites to estimate
+survival, growth, and reproduction of <em>Lonicera maackii</em>, and
+then used data from the literature to estimate seed germination,
+viability, and establishment probability. We highlight this so that
+users who wish to consider, for example, seed vital rates as a function
+of climate, are careful to check the original publications and
+understand that the latitude/longitude and date ranges listed in PADRINO
+may not apply to all vital rates in the model.</p></li>
+<li><p><code>Same data as &lt;reference&gt;</code>,
+<code>Demographic data from &lt;reference&gt;</code>. These indicate
+that the underlying demographic data are taken from another reference,
+and used in a possibly modified IPM. Therefore, it would be good to
+check both publications to make sure the data meet your criteria for
+usage.</p></li>
+<li><p>There a lot of messages related to latitude/longitude coordinates
+and their precision. Use caution when using these models in contexts
+where exact geographic references are required!</p></li>
+<li><p><code>&#39;ipm_id&#39; &lt;xyz&gt; has resampled parameters, resetting &#39;det_stoch&#39; to &#39;stoch&#39;...</code>
+These are models for which all parameter values are not known ahead of
+time, because some parameters are random variables drawn from known
+distributions. Therefore, they take a bit longer to build and run,
+because sub-kernels have to be re-built at every iteration using the new
+random parameter draws. It is essential that users get this information
+up front, because the default of 50 iterations is certainly insufficient
+to understand stochastic behavior. The number of iterations can be
+increased with the <code>addl_args</code> argument of
+<code>pdb_make_ipm()</code>.</p></li>
+</ul>
+</div>
+<div id="messages-and-warnings-during-ipm-construction-from-ipmr-level-functions" class="section level1">
+<h1>Messages and warnings during IPM construction from
+<code>ipmr</code>-level functions</h1>
+<p>More will be added here shortly. In the meantime, email <a href="mailto:levisc8@gmail.com">Sam Levin</a> if you encounter issues
+during IPM construction with <code>Rpadrino</code>.</p>
+</div>
+<div id="messages-and-warnings-during-ipm-construction-from-rpadrino-level-functions" class="section level1">
+<h1>Messages and warnings during IPM construction from
+<code>Rpadrino</code>-level functions</h1>
+<p>More will be added here shortly. In the meantime, email <a href="mailto:levisc8@gmail.com">Sam Levin</a> if you encounter issues
+during IPM construction with <code>Rpadrino</code>.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
