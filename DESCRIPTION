@@ -1,6 +1,6 @@
 Package: Rpadrino
 Title: Interact with the 'PADRINO' IPM Database
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: c(
     person(given = "Sam",
            family = "Levin",
@@ -42,21 +42,23 @@ Description: 'PADRINO' houses textual representations of
   for more information on 'ipmr', the engine that powers model reconstruction
   <doi:10.1111/2041-210X.13683>.
 Depends: R (>= 3.4.0), ipmr (>= 0.0.5)
-Imports: ggplot2, magrittr, mvtnorm, purrr, rlang (>= 0.3.0),
+Imports: curl, ggplot2, magrittr, mvtnorm, purrr, rlang (>= 0.3.0),
         rmarkdown, tools, truncdist, utils
+SystemRequirements: libcurl: libcurl-devel (rpm) or
+        libcurl4-openssl-dev (deb).
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 BugReports: https://github.com/padrinoDB/Rpadrino/issues
 URL: https://github.com/padrinoDB/Rpadrino,
         https://padrinoDB.github.io/Rpadrino/
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.2
 Suggests: covr, knitr, maps, roxygen2, testthat
 VignetteBuilder: knitr
 Config/testthat/parallel: true
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-04-28 18:14:01 UTC; sl13sise
+Packaged: 2023-09-22 20:03:42 UTC; sl13sise
 Author: Sam Levin [aut, cre] (<https://orcid.org/0000-0002-3289-9925>),
   Aldo Compagnoni [aut],
   Dylan Childs [aut],
@@ -66,4 +68,4 @@ Author: Sam Levin [aut, cre] (<https://orcid.org/0000-0002-3289-9925>),
   Tiffany Knight [aut]
 Maintainer: Sam Levin <levisc8@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-04-29 23:20:14 UTC
+Date/Publication: 2023-09-22 22:40:02 UTC

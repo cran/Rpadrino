@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function(e) {
     </style>
 
 
+
 <style type="text/css">
   code {
     white-space: pre;
@@ -676,7 +677,7 @@ to that state before we insert our own information.</p>
 <div id="insert-our-environmental-variation" class="section level2">
 <h2>Insert our environmental variation</h2>
 <p>Next, we’re going to insert our environmantal information using
-<code>ipmr</code>’s <a href="https://levisc8.github.io/ipmr/reference/define_star.html"><code>define_env_state()</code></a>.
+<code>ipmr</code>’s <a href="https://padrinoDB.github.io/ipmr/reference/define_star.html"><code>define_env_state()</code></a>.
 In the call to <code>sample_env()</code>, we set <code>index = t</code>.
 <code>t</code> is an internal variable that <code>ipmr</code> defines to
 track what timestep of the simulation it is currently on. This will
@@ -702,15 +703,15 @@ when the simulation runs.</p>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lambda</span>(ipms)</span></code></pre></div>
 <pre><code>## $aaaa15
 ##     lambda 
-## -0.1033479 
+## -0.1035558 
 ## 
 ## $aaaa16
 ##    lambda 
-## 0.2710611 
+## 0.2710374 
 ## 
 ## $aaaa15_2
 ##     lambda 
-## -0.1031656</code></pre>
+## -0.1034538</code></pre>
 <table style="width:70%;">
 <caption>
 Environmental covariate sequence from unaltered PADRINO data (first 10
@@ -729,10 +730,42 @@ A_max
 <tbody>
 <tr>
 <td style="text-align:right;">
-3
+2
 </td>
 <td style="text-align:right;">
-6.885493
+6.175675
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5.713312
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+6.277382
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+6.123218
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+6.770578
 </td>
 </tr>
 <tr>
@@ -740,7 +773,7 @@ A_max
 1
 </td>
 <td style="text-align:right;">
-5.606567
+5.061616
 </td>
 </tr>
 <tr>
@@ -748,31 +781,15 @@ A_max
 5
 </td>
 <td style="text-align:right;">
-6.185809
+6.075462
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-2
+1
 </td>
 <td style="text-align:right;">
-5.683118
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-6.073683
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-5.216322
+6.907894
 </td>
 </tr>
 <tr>
@@ -780,31 +797,15 @@ A_max
 3
 </td>
 <td style="text-align:right;">
-6.408164
+6.833537
 </td>
 </tr>
 <tr>
 <td style="text-align:right;">
-4
+2
 </td>
 <td style="text-align:right;">
-6.350631
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-6.722912
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-6.100611
+5.919426
 </td>
 </tr>
 </tbody>
@@ -827,10 +828,42 @@ A_max
 <tbody>
 <tr>
 <td style="text-align:right;">
-2
+5
 </td>
 <td style="text-align:right;">
-5.872700
+7.420765
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+6.026861
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+7.400723
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+6.439495
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+6.635122
 </td>
 </tr>
 <tr>
@@ -838,15 +871,7 @@ A_max
 2
 </td>
 <td style="text-align:right;">
-7.091870
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-5.454284
+6.653187
 </td>
 </tr>
 <tr>
@@ -854,7 +879,15 @@ A_max
 1
 </td>
 <td style="text-align:right;">
-6.470718
+6.017218
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+5.551615
 </td>
 </tr>
 <tr>
@@ -862,15 +895,7 @@ A_max
 1
 </td>
 <td style="text-align:right;">
-5.086940
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-7.249801
+7.911561
 </td>
 </tr>
 <tr>
@@ -878,31 +903,7 @@ A_max
 1
 </td>
 <td style="text-align:right;">
-5.748229
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-6.741378
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-6.420061
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-6.368241
+7.074661
 </td>
 </tr>
 </tbody>
@@ -1074,7 +1075,7 @@ altering it to preserve the original version. Again, we’ll only modify
 <pre><code>## log(lambda) is returned by default for stochastic models. Set &#39;log = FALSE&#39; for lambda on linear scale.</code></pre>
 <pre><code>## $aaaa15
 ##     lambda 
-## -0.1032111</code></pre>
+## -0.1033656</code></pre>
 </div>
 </div>
 <div id="changing-distributions" class="section level1">
@@ -1280,8 +1281,8 @@ same pipeline as above.</p>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lambda</span>(new_ipm)</span></code></pre></div>
 <pre><code>## $aaaa15
-##    lambda 
-## -0.102334</code></pre>
+##     lambda 
+## -0.1022285</code></pre>
 <p>It is probably ok to copy/paste the functions we defined above and
 apply to in your own analyses. However, as they are not yet incorporated
 into <code>Rpadrino</code>, I cannot promise that the results will be

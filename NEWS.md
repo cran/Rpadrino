@@ -1,3 +1,7 @@
+# Rpadrino 0.0.5
+
+This contains an update to keep `RPadrino` on CRAN. Namely, it checks for internet before trying to download `PADRINO`, and returns the internal `pdb` object if there is not internet available. This adds [`curl`](https://jeroen.r-universe.dev/curl) as a dependency.
+
 # Rpadrino 0.0.4
 
 This contains new features, and a couple changes for compatibility with `ipmr 0.0.5`. 
@@ -17,7 +21,7 @@ my_proto_ipms <- pdb_make_proto_ipm(pdb, ipm_id = ids)
 
 - `pdb_report()` now contains equations for each IPM using `ipmr`'s `make_ipm_report_body()`. 
 
-    + NB: This is currently unavailable for [parameter set indexed IPMs](https://levisc8.github.io/ipmr/articles/index-notation.html).
+    + NB: This is currently unavailable for [parameter set indexed IPMs](https://padrinoDB.github.io/ipmr/articles/index-notation.html).
 
 # Rpadrino 0.0.3
 
@@ -29,4 +33,4 @@ my_proto_ipms <- pdb_make_proto_ipm(pdb, ipm_id = ids)
 
 # Rpadrino 0.0.1
 
-This is the first stable release of `Rpadrino` and is available on CRAN. It includes functionality to download the [PADRINO IPM Database](https://github.com/padrinoDB/Padrino), explore and subset data, and rebuild IPMs. Additionally, it wraps [ipmr](https://levisc8.github.io/ipmr/reference/index.html) methods to get and set vital rate expressions, IPM sub-kernel formulae, parameter values, and more. Explore all the features in the [vignettes](https://padrinodb.github.io/Rpadrino/articles/padrino-intro.html) and report bugs on the Issue tracker in this repository.
+This is the first stable release of `Rpadrino` and is available on CRAN. It includes functionality to download the [PADRINO IPM Database](https://github.com/padrinoDB/Padrino), explore and subset data, and rebuild IPMs. Additionally, it wraps [ipmr](https://padrinoDB.github.io/ipmr/reference/index.html) methods to get and set vital rate expressions, IPM sub-kernel formulae, parameter values, and more. Explore all the features in the [vignettes](https://padrinodb.github.io/Rpadrino/articles/padrino-intro.html) and report bugs on the Issue tracker in this repository.
